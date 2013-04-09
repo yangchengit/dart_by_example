@@ -47,39 +47,39 @@ x / y = 10.67
 --------------------------------------------------------------------------------
 
 The expression interpolation shown in the code above creates a _static_ binding
-between a Dart object and its representation in the UI. When the page loads,
-all expressions inside `{{ }}` are evaluated. If the value of the objects being
-evaluated changes later on, the UI does not automatically update.
+between a Dart variable and its representation in the UI. When the page loads,
+all expressions inside `{{ }}` are evaluated. If the value of the evaluated
+variable's value changes later on, the UI does not automatically update.
 
-We will look at how we can make the binding between Dart objects and the UI
+We will look at how we can make the binding between Dart variables and the UI
 live in other recipes in this chapter.
 
 
-=== Observing a Dart object for changes
+=== Observing a Dart variable for changes
 
 ==== Problem
 
-You want to sync up an object and its display. Every time the object's value
-changes, you want its display to auto-magically change. You want this to happen
-without a page refresh, and without having to do any DOM manipulation.
+You want to sync a variable and its display. Every time the variable's value
+changes, you want its display to automatically change. You want this to happen
+without a page refresh, and without having to do any manual DOM manipulation.
 
 ==== Solution
 
-Add an `@observable` declaration right before you define the object:
+Add an `@observable` declaration right before you define the variable:
 
 --------------------------------------------------------------------------------
 @observable 
 var myVar;
 --------------------------------------------------------------------------------
 
-Then, put that object within double-curlies in the HTML:
+Then, put that variable within double-curlies in the HTML:
 
 --------------------------------------------------------------------------------
 <li>The value is {{myVar}}</li>
 --------------------------------------------------------------------------------
 
-This create a binding between that object and its display in the UI. Every time
-the object's value changes, the UI updates automatically.
+This create a binding between that variable and its display in the UI. If the 
+variable's value changes, the UI updates automatically.
 
 ==== Example
 
@@ -114,7 +114,7 @@ new quote every few seconds:
 var i = 0;
 currentQuote = quotes[i];
 
-new Timer.periodic(new Duration(milliseconds:2000), (_) {
+new Timer.periodic(new Duration(seconds: 2), (_) {
   i = (i == quotes.length - 1) ? 0 : i + 1;
   currentQuote = quotes[i];
 });
@@ -206,7 +206,7 @@ To enable real-time editing of a post, make the post object observable:
 --------------------------------------------------------------------------------
 @observable
 var post = 'This is my very first post about Dart, and the' + 
-           ' only thing I have to say is ...';
+           ' only thing I have to say is ...its awesome!!!';
 --------------------------------------------------------------------------------
 
 Create markup to display the post and its length. Use `{{ }}` syntax for
@@ -269,6 +269,5 @@ Here is the entire script:
 </body>
 </html>
 --------------------------------------------------------------------------------
-
 
 
