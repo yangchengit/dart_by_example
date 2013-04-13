@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+  <body>
+
+    Pick your favorite colors:<br>
+
+    <template iterate ="key in colors.keys">
+      <input type="checkbox" bind-checked="colors[key]">{{key}}<br>
+    </template>
+
+    <template instantiate="if !selectedColors.isEmpty">
+      <br>
+      You picked:
+      <ul>
+        <template iterate ="color in selectedColors">
+          <li>{{color}}</li>
+        </template>
+      </ul>
+    </template>
+ 
+ 
+    <script type="application/dart">
+      import 'package:web_ui/web_ui.dart';
+      
+      var colors = toObservable({'red': false, 'blue': false, 'green': false});
+      
+      List get selectedColors => colors.keys.where((c) => colors[c]).toList();
+      
+      void main() {}
+    
+    </script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>

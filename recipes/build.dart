@@ -3,9 +3,12 @@ import 'dart:io';
 
 void main() {
   build(new Options().arguments, [
-      'web/webui/inject_expression/main.html',
-      'web/webui/one_way_data_binding/main.html',
-      'web/webui/textBinding/main.html'
+      'web/webui/inject-expression/main.html',
+      'web/webui/one-way-data-binding/main.html',
+      'web/webui/text-binding/main.html',
+      'web/webui/radio-binding/main.html',
+      'web/webui/multiple-checkbox-binding/main.html',
+      'web/webui/select-binding/main.html'
       ]);
 }
 
