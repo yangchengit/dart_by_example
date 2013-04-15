@@ -13,8 +13,8 @@ import 'package:web_ui/web_ui.dart';
 // Original code
 
 
-      var x = 32;
-      var y = 3;
+      num x = 32;
+      num y = 3;
 
       void main() {}
     
