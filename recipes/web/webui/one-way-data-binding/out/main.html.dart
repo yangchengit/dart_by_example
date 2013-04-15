@@ -15,20 +15,20 @@ import 'dart:async';
 
       
       class Quote {
-        String quote, saidBy; 
+        final String quote, saidBy; 
         Quote(this.quote, this.saidBy);
       }
       
       final __changes = new __observe.Observable();
 
-      dynamic __$currentQuote;
-      dynamic get currentQuote {
+      Quote __$currentQuote;
+      Quote get currentQuote {
         if (__observe.observeReads) {
           __observe.notifyRead(__changes, __observe.ChangeRecord.FIELD, 'currentQuote');
         }
         return __$currentQuote;
       }
-      set currentQuote(dynamic value) {
+      set currentQuote(Quote value) {
         if (__observe.hasObservers(__changes)) {
           __observe.notifyChange(__changes, __observe.ChangeRecord.FIELD, 'currentQuote',
               __$currentQuote, value);

@@ -10,12 +10,12 @@
       import 'dart:async';
       
       class Quote {
-        String quote, saidBy; 
+        final String quote, saidBy; 
         Quote(this.quote, this.saidBy);
       }
       
       @observable 
-      var currentQuote;
+      Quote currentQuote;
         
       void main() {
         List<Quote> quotes = [
