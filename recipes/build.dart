@@ -8,6 +8,7 @@ void main() {
       'web/webui/text-binding/main.html',
       'web/webui/radio-binding/main.html',
       'web/webui/multiple-checkbox-binding/main.html',
+      'web/webui/multiple-checkbox-binding-with-class/main.html',
       'web/webui/select-binding/main.html',
       'web/webui/list-binding/main.html'
       ]);
