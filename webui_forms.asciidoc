@@ -1,0 +1,70 @@
+=== Creating a bidirectional binding using radio buttons
+
+==== Problem
+
+You want to use radio buttons to allow a user to select a single value from a
+small set of choices. You want to bind the value of the radio button selected
+to a Dart variable.
+
+==== Solution
+
+Make the variable used to store the value of the radio button observable:
+
+--------------------------------------------------------------------------------
+@observable
+var myVar = '';
+--------------------------------------------------------------------------------
+
+Use 'bind-value=' syntax to bind the value of a radio button to
+that variable:
+
+--------------------------------------------------------------------------------
+<input type="radio" name='someName' value="someValue" bind-value='someVar' />
+--------------------------------------------------------------------------------
+
+As the user selects a button, its value is automatically stored in the
+observable variable. If the observable variable is placed within `{{ }}` in the
+UI, its display updates as the variable's value changes.
+
+==== Example
+
+Here is a simple example. Note that giving the observable variable an intial
+value pre-selects the radio button with that value. Also note that the radio
+buttons are grouped together by giving the name attribute a common value:
+
+--------------------------------------------------------------------------------
+<!DOCTYPE html>
+
+<html>
+  <body>
+    <div>
+      <input type="radio" name='veggies' value="kale" bind-value="veg">
+        Kale<br>
+      <input type="radio" name='veggies' value="spinach" bind-value="veg">
+        Spinach<br>
+      <input type="radio" name='veggies' value="carrots" bind-value="veg">
+        Carrots
+    </div>
+    
+    <p>veg = {{veg}}</p>
+     
+    <script type="application/dart">
+      
+      import 'package:web_ui/web_ui.dart';
+
+      @observable
+      String veg = "spinach"; // Sets an initial value. Button with 
+                              // value == 'spinach' is auto-selected.
+
+      void main() {}
+      
+    </script>
+  </body>
+</html>
+-------------------------------------------------------------------------------
+
+
+
+
+
+
