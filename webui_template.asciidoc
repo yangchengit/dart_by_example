@@ -198,14 +198,15 @@ First, make the variable observable:
 var myVar = value;
 --------------------------------------------------------------------------------
 
-Then, bind a text input or a textarea to that variable using 'bind-value=' syntax:
+Then, bind a text input or a textarea to that variable. Use 'bind-value='
+syntax:
 
 --------------------------------------------------------------------------------
 <input type='text' bind-value='myVar'>
 <textarea bind-value='myVar'></textarea>
 --------------------------------------------------------------------------------
 
-This creates a bi-directional binding: changing the variable's value updates 
+This creates a bidirectional binding: changing the variable's value updates 
 the UI, and changing the UI updates the variable's value.
 
 ==== Example
@@ -230,8 +231,8 @@ Use `{{ }}` syntax for displaying the post and its length:
 <p><em>Post Length:</em>  {{post.length}}</p>
 --------------------------------------------------------------------------------
 
-Then, create the binding in the textarea for editing the post (along with a
-tracker that tells you how many characters you have remaining):
+Then, create the binding in the textarea for editing the post, along with a
+tracker that tells you how many characters you have remaining:
 
 --------------------------------------------------------------------------------
 <textarea rows='4' cols='40' bind-value="post"></textarea>
@@ -241,7 +242,7 @@ tracker that tells you how many characters you have remaining):
 That's it, you're done!
 
 By sprinkling a few declarative statements in your code, you get to enjoy all
-the functionality that bi-directional binding gives you:
+the functionality that bidirectional binding gives you:
 
 * You need to do nothing to make the textarea sticky: it automatically contains
 the post text.
