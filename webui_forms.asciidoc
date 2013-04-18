@@ -1,22 +1,23 @@
-=== Creating a bidirectional binding using radio buttons
+=== Creating a binding using radio buttons
 
 ==== Problem
 
 You want to use radio buttons to allow a user to select a single value from a
-small set of choices. You want to bind the value of the radio button selected
-to a Dart variable.
+set of choices. You want to bind the value of the selected radio button to a
+Dart variable.
 
 ==== Solution
 
-Make the variable used to store the value of the radio button observable:
+First, make the Dart variable used to store the value of the radio button
+observable:
 
 --------------------------------------------------------------------------------
 @observable
 var myVar = '';
 --------------------------------------------------------------------------------
 
-Use 'bind-value=' syntax to bind the value of a radio button to
-that variable:
+Then, use 'bind-value=' syntax to bind the value of a radio button to that
+variable:
 
 --------------------------------------------------------------------------------
 <input type="radio" name='someName' value="someValue" bind-value='someVar' />
@@ -28,9 +29,9 @@ UI, its display updates as the variable's value changes.
 
 ==== Example
 
-Here is a simple example. Note that giving the observable variable an intial
-value pre-selects the radio button with that value. Also note that the radio
-buttons are grouped together by giving the name attribute a common value:
+Here is a simple example of how you can create a bidirectional binding when
+using radio buttons. Note that giving the observable variable an intial
+value pre-selects the radio button with that value:
 
 --------------------------------------------------------------------------------
 <!DOCTYPE html>
@@ -61,10 +62,251 @@ buttons are grouped together by giving the name attribute a common value:
     </script>
   </body>
 </html>
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 
+=== Creating bindings for booleans using checkboxes
+
+==== Problem
+
+You want to use a checkbox to store the value of a boolean object. And because
+you have parts of your UI depenedent on that boolean object, you want its value
+to update automatically as a user checks or unchecks the checkbox.
+
+==== Solution
+
+Bind the checkbox to a boolean using 'bind-checked=' syntax:
+
+--------------------------------------------------------------------------------
+<input type="checkbox" bind-checked="someBool">
+--------------------------------------------------------------------------------
+
+Checking the checkbox sets the boolean value to true, and unchecking it sets
+the value to false:
+
+--------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+  <body>
+    <input type="checkbox" bind-checked="someBool">Check or uncheck<br>
+
+    <p>The checkbox is {{someBool ? 'checked' : 'unchecked'}}</p>
+ 
+ 
+    <script type="application/dart">
+      import 'package:web_ui/web_ui.dart';
+       
+      bool someBool = true;
+      
+      void main() {}
+   
+    </script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>
+--------------------------------------------------------------------------------
 
 
+==== Example
+
+The code below demonstrates the use of checkboxes to toggle the boolean
+attributes of an object:
+
+--------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      th, td {border: 1px solid black; padding: 20px}  
+    </style>
+  </head>
+  <body>
+    <div>
+      Edit record for student <em>{{student.studentId}}:</em><br>
+      <input type="checkbox" bind-checked="student.isGraduating" />
+          Graduating?<br>
+      <input type="checkbox" bind-checked="student.isHonorStudent" />
+          Honor Student?<br>
+    </div> 
+    
+    <br>
+    
+    <table>
+      <tr><th>Student Id</th><th>Graduating?</th><th>Honor Student?</th></tr>
+      <tr>
+        <td>{{student.studentId}}</td>
+        <td>{{student.isGraduating ?   'Yes' : 'No'}}</td>
+        <td>{{student.isHonorStudent ? 'Yes' : 'No'}}</td>
+      </tr>
+    </table>  
+    
+    <script type="application/dart">
+      import 'package:web_ui/web_ui.dart';
+
+      class Student {
+        final String studentId;
+        
+        @observable
+        bool isGraduating;
+        
+        @observable
+        bool isHonorStudent;
+        
+        Student(this.studentId, this.isGraduating, this.isHonorStudent);
+      }
+      
+      Student student;
+      
+      void main() {
+        student = new Student("12345678", false, true);
+      }
+      
+    </script>
+
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>
+--------------------------------------------------------------------------------
+
+Note that we mark the boolean instance variables of the `Student` class as
+@observable:
+
+--------------------------------------------------------------------------------
+class Student {
+  final String studentId;
+  
+  @observable
+  bool isGraduating;
+  
+  @observable
+  bool isHonorStudent;
+  
+  Student(this.studentId, this.isGraduating, this.isHonorStudent);
+}
+--------------------------------------------------------------------------------
+
+This creates a one-way binding between the values stored within the observable
+attributes of any `Student` object and the UI:
+
+--------------------------------------------------------------------------------
+<td>{{student.isGraduating ?   'Yes' : 'No'}}</td>
+<td>{{student.isHonorStudent ? 'Yes' : 'No'}}</td>
+--------------------------------------------------------------------------------
+
+We make the binding bidirectional using `bind-checked=` syntax. This allows us
+to modify the observable instance variables using the bound checkboxes:
+
+--------------------------------------------------------------------------------
+Edit record for student <em>{{student.studentId}}:</em><br>
+<input type="checkbox" bind-checked="student.isGraduating" />
+    Graduating?<br>
+<input type="checkbox" bind-checked="student.isHonorStudent" />
+    Honor Student?<br>
+--------------------------------------------------------------------------------
+
+Note that setting one of the instance variables to `true` automatically checks
+the corresponding checkbox when the page loads:
+
+--------------------------------------------------------------------------------
+new Student("12345678", false, true);
+--------------------------------------------------------------------------------
+
+
+=== Selecting multiple items from a list of checkboxes using data-binding
+
+==== Problem
+
+You want to use checkboxes to allow a user to select multiple values from a
+set of choices. You want to keep track of the checkboxes that are checked
+by the user, and want live updates in the UI every time the user checks or
+unchecks a checkbox.
+
+==== Solution
+
+Create a map to keep track of the checked state of the checkboxes. Make the
+checkbox values the map keys, and assign each key a boolean value. Assign `true`
+for a checked checkbox, and `false` for an unchecked one. 
+
+Now, sync the checkboxes and the map by creating a bidirectional binding
+between them.
+
+First, make the map observable. You can do this by using the top-level
+`toObservable()` function:
+
+--------------------------------------------------------------------------------
+Map<String, bool> myMap = toObservable({'value1': true, 'value2': false});
+--------------------------------------------------------------------------------
+
+Then, bind each checkbox to the corresponding map key using `bind-checked=`
+syntax:
+
+--------------------------------------------------------------------------------
+<input type="checkbox" bind-checked="myMap['value1']">{{value1}}
+<input type="checkbox" bind-checked="myMap['value2']">{{value2}}
+--------------------------------------------------------------------------------
+
+When the page loads, checkboxes corresponding to map keys with `true` values
+are checked.  As the user checks and unchecks checkboxes, the map values update
+accordingly.
+
+To know which checkboxes were checked by the user, select the map keys with
+`true` values.
+
+==== Example
+
+Here is a short example that you can build and run:
+
+--------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+  <body>
+    Pick your favorite colors:<br>
+
+    <template repeat ="key in colors.keys">
+      <input type="checkbox" bind-checked="colors[key]">{{key}}<br>
+    </template>
+
+    <template if="!selectedColors.isEmpty">
+      <br>
+      You picked:
+      <ul>
+        <li template repeat='color in selectedColors'>{{color}}</li>
+      </ul>
+    </template> 
+ 
+    <script type="application/dart">
+      import 'package:web_ui/web_ui.dart';
+       
+      final Map<String, bool> colors = toObservable(
+        {'red': false, 'blue': false, 'green': false}
+      );
+      
+      List<String> get selectedColors {
+        return colors.keys.where((c) => colors[c]).toList();
+      }
+      
+      void main() {}
+   
+    </script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>
+--------------------------------------------------------------------------------
+
+We bind the checkbox values to a map as described earlier in this recipes. We
+implement a getter to keep track of the checked values. 
+
+Note that getters and setters do not have to be marked as observable: you just
+need to make sure that all fields they depend on are observable. In our example,
+the `selectedColors` getter relies only on the `colors` map. Since we have
+made `colors` observable, `selectedColors` executes when the values in
+`colors` change. As a result, the parts of the UI responsible for displaying
+the values of the checked checkboxes gets updated in real time:
+
+--------------------------------------------------------------------------------
+<ul>
+  <li template repeat='color in selectedColors'>{{color}}</li>
+</ul>
+--------------------------------------------------------------------------------
 
 

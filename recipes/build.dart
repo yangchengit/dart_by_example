@@ -3,6 +3,7 @@ import 'dart:io';
 
 void main() {
   build(new Options().arguments, [
+      'web/webui/boolean-binding/main.html',
       'web/webui/inject-expression/main.html',
       'web/webui/one-way-data-binding/main.html',
       'web/webui/text-binding/main.html',

@@ -12,12 +12,14 @@ import 'package:web_ui/web_ui.dart';
 
 // Original code
 
-      
+       
       final Map<String, bool> colors = toObservable(
         {'red': false, 'blue': false, 'green': false}
       );
       
-      List get selectedColors => colors.keys.where((c) => colors[c]).toList();
+      List<String> get selectedColors {
+        return colors.keys.where((c) => colors[c]).toList();
+      }
       
       void main() {}
    
