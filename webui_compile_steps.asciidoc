@@ -1,0 +1,73 @@
+The Web UI package provides web components and templates to help you write web
+applications at scale.
+
+The examples in this chapter can be compiled and run using Dart Editor.
+
+==== Pub dependency 
+
+The Web UI package is available from Pub, Dart's package manager.  In a Dart
+application that you have opened in the Editor, add the dependency to the Web
+UI package:
+
+--------------------------------------------------------------------------------
+dependencies:
+  web_ui: any
+--------------------------------------------------------------------------------
+
+This is what a sample `pubspec.yaml` file looks like:
+
+--------------------------------------------------------------------------------
+name: sample
+description: A sample web application
+dependencies:
+  browser: any
+  web_ui: any
+--------------------------------------------------------------------------------
+
+Run `pub install` from the Editor's Tools menu to install the web_ui package.
+
+==== Example file
+
+Copy the example in a new file in the top level `web/` directory (create that
+directory if it does not exist).  You can call the example whatever you like,
+as long as you give the file a `.html` suffix (we refer to it here as
+`main.html`).
+
+==== Build file
+
+Create a top level `build.dart` file with the following contents:
+
+--------------------------------------------------------------------------------
+import 'package:web_ui/component_build.dart';
+import 'dart:io';
+
+void main() {
+  build(new Options().arguments, ['web/main.html']);
+}
+--------------------------------------------------------------------------------
+
+This assumes that you called your example file `main.html`. Modify the filename
+in `build.dart` if you picked a different name for your example file.
+
+==== Compiling the example
+
+Right-click the `build.dart` file, and choose `Run` from the drop down menu.
+
+This runs the Web UI compile script (`packages/web_ui/dwc.dart') and generates
+an `out` directory containing the compiled files. 
+
+Right-click on `out/main.html`, and select either the `run in Dartium` or
+`Run as Javascript` option to run the example.
+
+==== Making changes
+
+You need to go through the compile process only once. After the intial
+compilation is done, Dart Editor detects changes you make to the example file,
+and automatically invokes the `dwc.dart` compiler script. You can directly run
+the example file (`web/main.html`) and Dart Editor automatically runs the
+compiled file.
+
+For more information about the Web UI compile process see
+http://www.dartlang.org/articles/web-ui/tools.html.
+
+
