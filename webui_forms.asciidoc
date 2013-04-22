@@ -223,7 +223,7 @@ new Student('12345678', false, true);
 --------------------------------------------------------------------------------
 
 
-=== Selecting multiple items from a list of checkboxes using data-binding
+=== Selecting multiple items from a list of checkboxes using data binding
 
 ==== Problem
 
