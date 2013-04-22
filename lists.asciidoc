@@ -231,6 +231,7 @@ var fruitFixed = new List.from(fruit1, growable: false);
 --------------------------------------------------------------------------------
 
 You can then modify an element:
+
 --------------------------------------------------------------------------------
 vowelsFixed[0] = 'Y';
 print(vowelsFixed[0]); 'Y'
