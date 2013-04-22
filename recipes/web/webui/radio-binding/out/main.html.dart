@@ -15,7 +15,7 @@ import 'package:web_ui/web_ui.dart';
 
       final __changes = new __observe.Observable();
 
-      String __$veg = "spinach";
+      String __$veg = 'spinach';
       String get veg {
         if (__observe.observeReads) {
           __observe.notifyRead(__changes, __observe.ChangeRecord.FIELD, 'veg');

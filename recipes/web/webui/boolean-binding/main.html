@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <input type="checkbox" bind-checked="someBool">Check or uncheck<br>
+    <input type='checkbox' bind-checked='someBool'>Check or uncheck<br>
 
     <p>The checkbox is {{someBool ? 'checked' : 'unchecked'}}</p>
  
  
-    <script type="application/dart">
+    <script type='application/dart'>
       import 'package:web_ui/web_ui.dart';
        
       bool someBool = true;
@@ -14,6 +14,6 @@
       void main() {}
    
     </script>
-    <script src="packages/browser/dart.js"></script>
+    <script src='packages/browser/dart.js'></script>
   </body>
 </html>

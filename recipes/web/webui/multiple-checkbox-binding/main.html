@@ -3,11 +3,11 @@
   <body>
     Pick your favorite colors:<br>
 
-    <template repeat ="key in colors.keys">
-      <input type="checkbox" bind-checked="colors[key]">{{key}}<br>
+    <template repeat ='key in colors.keys'>
+      <input type='checkbox' bind-checked='colors[key]'>{{key}}<br>
     </template>
 
-    <template if="!selectedColors.isEmpty">
+    <template if='!selectedColors.isEmpty'>
       <br>
       You picked:
       <ul>
@@ -15,7 +15,7 @@
       </ul>
     </template> 
  
-    <script type="application/dart">
+    <script type='application/dart'>
       import 'package:web_ui/web_ui.dart';
        
       final Map<String, bool> colors = toObservable(
@@ -29,6 +29,6 @@
       void main() {}
    
     </script>
-    <script src="packages/browser/dart.js"></script>
+    <script src='packages/browser/dart.js'></script>
   </body>
 </html>

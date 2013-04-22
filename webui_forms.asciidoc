@@ -20,18 +20,21 @@ Then, use 'bind-value=' syntax to bind the value of a radio button to that
 variable:
 
 --------------------------------------------------------------------------------
-<input type="radio" name='someName' value="someValue" bind-value='someVar' />
+<input type='radio' name='someName' value='someValue' bind-value='myVar' />
 --------------------------------------------------------------------------------
 
 As the user selects a button, its value is automatically stored in the
-observable variable. If the observable variable is placed within `{{ }}` in the
-UI, its display updates as the variable's value changes.
+observable variable. The display of the observable variable is updated as its
+value changes if it is placed within `{{ }}` in the HTML.
+
+To bind multiple radio buttons to the same variable, assign the same value to
+each radio button's name attribute. See the example below.
 
 ==== Example
 
 Here is a simple example of how you can create a bidirectional binding when
-using radio buttons. Note that giving the observable variable an intial
-value pre-selects the radio button with that value:
+using radio buttons. Giving the observable variable a value selects the
+radio button with that value:
 
 --------------------------------------------------------------------------------
 <!DOCTYPE html>
@@ -39,22 +42,22 @@ value pre-selects the radio button with that value:
 <html>
   <body>
     <div>
-      <input type="radio" name='veggies' value="kale" bind-value="veg">
+      <input type='radio' name='veggies' value='kale' bind-value='veg'>
         Kale<br>
-      <input type="radio" name='veggies' value="spinach" bind-value="veg">
+      <input type='radio' name='veggies' value='spinach' bind-value='veg'>
         Spinach<br>
-      <input type="radio" name='veggies' value="carrots" bind-value="veg">
+      <input type='radio' name='veggies' value='carrots' bind-value='veg'>
         Carrots
     </div>
     
     <p>veg = {{veg}}</p>
      
-    <script type="application/dart">
+    <script type='application/dart'>
       
       import 'package:web_ui/web_ui.dart';
 
       @observable
-      String veg = "spinach"; // Sets an initial value. Button with 
+      String veg = 'spinach'; // Sets an initial value. Button with 
                               // value == 'spinach' is auto-selected.
 
       void main() {}
@@ -70,15 +73,22 @@ value pre-selects the radio button with that value:
 ==== Problem
 
 You want to use a checkbox to store the value of a boolean object. And because
-you have parts of your UI depenedent on that boolean object, you want its value
+you have parts of your UI dependent on that boolean object, you want its value
 to update automatically as a user checks or unchecks the checkbox.
 
 ==== Solution
 
+Make the boolean observable:
+
+--------------------------------------------------------------------------------
+@observable
+bool someBool = false;
+--------------------------------------------------------------------------------
+
 Bind the checkbox to a boolean using 'bind-checked=' syntax:
 
 --------------------------------------------------------------------------------
-<input type="checkbox" bind-checked="someBool">
+<input type='checkbox' bind-checked='someBool'>
 --------------------------------------------------------------------------------
 
 Checking the checkbox sets the boolean value to true, and unchecking it sets
@@ -88,20 +98,21 @@ the value to false:
 <!DOCTYPE html>
 <html>
   <body>
-    <input type="checkbox" bind-checked="someBool">Check or uncheck<br>
+    <input type='checkbox' bind-checked='someBool'>Check or uncheck<br>
 
     <p>The checkbox is {{someBool ? 'checked' : 'unchecked'}}</p>
  
  
-    <script type="application/dart">
+    <script type='application/dart'>
       import 'package:web_ui/web_ui.dart';
        
+      @observable
       bool someBool = true;
       
       void main() {}
    
     </script>
-    <script src="packages/browser/dart.js"></script>
+    <script src='packages/browser/dart.js'></script>
   </body>
 </html>
 --------------------------------------------------------------------------------
@@ -123,9 +134,9 @@ attributes of an object:
   <body>
     <div>
       Edit record for student <em>{{student.studentId}}:</em><br>
-      <input type="checkbox" bind-checked="student.isGraduating" />
+      <input type='checkbox' bind-checked='student.isGraduating' />
           Graduating?<br>
-      <input type="checkbox" bind-checked="student.isHonorStudent" />
+      <input type='checkbox' bind-checked='student.isHonorStudent' />
           Honor Student?<br>
     </div> 
     
@@ -140,7 +151,7 @@ attributes of an object:
       </tr>
     </table>  
     
-    <script type="application/dart">
+    <script type='application/dart'>
       import 'package:web_ui/web_ui.dart';
 
       class Student {
@@ -158,12 +169,12 @@ attributes of an object:
       Student student;
       
       void main() {
-        student = new Student("12345678", false, true);
+        student = new Student('12345678', false, true);
       }
       
     </script>
 
-    <script src="packages/browser/dart.js"></script>
+    <script src='packages/browser/dart.js'></script>
   </body>
 </html>
 --------------------------------------------------------------------------------
@@ -198,9 +209,9 @@ to modify the observable instance variables using the bound checkboxes:
 
 --------------------------------------------------------------------------------
 Edit record for student <em>{{student.studentId}}:</em><br>
-<input type="checkbox" bind-checked="student.isGraduating" />
+<input type='checkbox' bind-checked='student.isGraduating' />
     Graduating?<br>
-<input type="checkbox" bind-checked="student.isHonorStudent" />
+<input type='checkbox' bind-checked='student.isHonorStudent' />
     Honor Student?<br>
 --------------------------------------------------------------------------------
 
@@ -208,7 +219,7 @@ Note that setting one of the instance variables to `true` automatically checks
 the corresponding checkbox when the page loads:
 
 --------------------------------------------------------------------------------
-new Student("12345678", false, true);
+new Student('12345678', false, true);
 --------------------------------------------------------------------------------
 
 
@@ -241,8 +252,8 @@ Then, bind each checkbox to the corresponding map key using `bind-checked=`
 syntax:
 
 --------------------------------------------------------------------------------
-<input type="checkbox" bind-checked="myMap['value1']">{{value1}}
-<input type="checkbox" bind-checked="myMap['value2']">{{value2}}
+<input type='checkbox' bind-checked='myMap["value1"]'>{{value1}}
+<input type='checkbox' bind-checked='myMap["value2"]'>{{value2}}
 --------------------------------------------------------------------------------
 
 When the page loads, checkboxes corresponding to map keys with `true` values
@@ -262,11 +273,11 @@ Here is a short example that you can build and run:
   <body>
     Pick your favorite colors:<br>
 
-    <template repeat ="key in colors.keys">
-      <input type="checkbox" bind-checked="colors[key]">{{key}}<br>
+    <template repeat ='key in colors.keys'>
+      <input type='checkbox' bind-checked='colors[key]'>{{key}}<br>
     </template>
 
-    <template if="!selectedColors.isEmpty">
+    <template if='!selectedColors.isEmpty'>
       <br>
       You picked:
       <ul>
@@ -274,7 +285,7 @@ Here is a short example that you can build and run:
       </ul>
     </template> 
  
-    <script type="application/dart">
+    <script type='application/dart'>
       import 'package:web_ui/web_ui.dart';
        
       final Map<String, bool> colors = toObservable(
@@ -288,7 +299,7 @@ Here is a short example that you can build and run:
       void main() {}
    
     </script>
-    <script src="packages/browser/dart.js"></script>
+    <script src='packages/browser/dart.js'></script>
   </body>
 </html>
 --------------------------------------------------------------------------------

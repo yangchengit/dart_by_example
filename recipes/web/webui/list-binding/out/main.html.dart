@@ -19,8 +19,22 @@ import 'dart:async';
        // Something, *anything* needs to be @observable, or list.add() does not 
        // work. If you remove the @observable, the items in the Timer don't
        // show up in the display of the list.
-       // @observable
-       String completelyMeaninglessString = '';
+       final __changes = new __observe.Observable();
+
+       String __$completelyMeaninglessString = '';
+       String get completelyMeaninglessString {
+         if (__observe.observeReads) {
+           __observe.notifyRead(__changes, __observe.ChangeRecord.FIELD, 'completelyMeaninglessString');
+         }
+         return __$completelyMeaninglessString;
+       }
+       set completelyMeaninglessString(String value) {
+         if (__observe.hasObservers(__changes)) {
+           __observe.notifyChange(__changes, __observe.ChangeRecord.FIELD, 'completelyMeaninglessString',
+               __$completelyMeaninglessString, value);
+         }
+         __$completelyMeaninglessString = value;
+       }
        
        void main() {
          new Timer(new Duration(seconds: 1), () {

@@ -8,11 +8,11 @@
 
   <p>
     <em>Edit Post:</em><br>
-    <textarea rows='4' cols='40' bind-value="post"></textarea>
+    <textarea rows='4' cols='40' bind-value='post'></textarea>
   </p>
   <p><em>Chars remaining:</em> {{MAXLENGTH - post.length}}</p>
 
-  <script type="application/dart">
+  <script type='application/dart'>
     import 'package:web_ui/web_ui.dart';
 
     @observable

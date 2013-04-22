@@ -3,22 +3,22 @@
 <html>
   <body>
     <div>
-      <input type="radio" name='veggies' value="kale" bind-value="veg">
+      <input type='radio' name='veggies' value='kale' bind-value='veg'>
         Kale<br>
-      <input type="radio" name='veggies' value="spinach" bind-value="veg">
+      <input type='radio' name='veggies' value='spinach' bind-value='veg'>
         Spinach<br>
-      <input type="radio" name='veggies' value="carrots" bind-value="veg">
+      <input type='radio' name='veggies' value='carrots' bind-value='veg'>
         Carrots
     </div>
     
     <p>veg = {{veg}}</p>
      
-    <script type="application/dart">
+    <script type='application/dart'>
       
       import 'package:web_ui/web_ui.dart';
 
       @observable
-      String veg = "spinach"; // Sets an initial value. Button with 
+      String veg = 'spinach'; // Sets an initial value. Button with 
                               // value == 'spinach' is auto-selected.
 
       void main() {}
