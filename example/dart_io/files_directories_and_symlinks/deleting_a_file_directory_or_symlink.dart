@@ -1,8 +1,6 @@
-/// Use the `delete()` method to delete a file, directory or symlink. This
-/// method is defined in `FileSystemEntity` and inherited by `File`,
-/// `Directory`, and `Link`.
-///
-/// The example here shows how to delete a directory.
+/// Use the FilesSystemEntity `delete()` method to delete a file, directory or
+/// symlink. This method is inherited by File, Directory, and Link.
+
 
 import 'dart:io';
 

@@ -1,4 +1,4 @@
-/// Use the Link target() method to get the target of a symlink.
+/// Use the Link `target()` method to get the target of a symlink.
 
 import 'dart:async';
 import 'dart:io';

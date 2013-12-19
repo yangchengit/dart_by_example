@@ -8,6 +8,6 @@ void main() {
   // Create a temporary directory in the system temp directory.
   Directory.systemTemp.createTemp('my_temp_dir')
     .then((directory) {
-      // Do something with the directory.
+      print(directory.path);
     });
 }

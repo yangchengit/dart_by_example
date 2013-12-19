@@ -1,7 +1,6 @@
-/// /// Use the `parent` property to get the parent of a file, directory or
-/// symlink.
-/// This property is defined in `FileSystemEntity` and inherited by `File`,
-/// `Directory`, and `Link`.
+/// /// Use the FileSystemEntity `parent` property to get the parent of a
+/// file, directory or symlink.
+/// This property is inherited by File, Directory, and Link.
 
 import 'dart:io';
 

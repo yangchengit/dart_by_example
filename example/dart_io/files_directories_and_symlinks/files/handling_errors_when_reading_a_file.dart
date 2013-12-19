@@ -16,6 +16,6 @@ main() {
     // Catch errors.
     .catchError((e) {
       print('There was a ${e.runtimeType} error');
-      print('Could not open $filename');
+      print('Could not read $filename');
     });
 }

@@ -1,6 +1,6 @@
 /// Use the File create() to create a file.
 /// To create intermediate directories, set the `recursive` argument to
-/// `true` (defaults to `false`).
+/// `true` (default is `false`).
 
 import 'dart:io';
 
@@ -14,6 +14,6 @@ void main() {
   new File('${systemTempDir.path}/dir/subdir/file.txt').create(recursive: true)
     // The created file is returned as a Future.
     .then((file) {
-      // Do something with the file.
+      print(file.path);
   });
 }

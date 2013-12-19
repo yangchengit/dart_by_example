@@ -1,6 +1,6 @@
-/// Use the `rename()` method to change the name of a file, directory or
-/// symlink. This method is defined in `FileSystemEntity` and inherited by
-/// `File`, `Directory`, and `Link`.
+/// Use the FileSystemEntity `rename()` method to change the name of a
+/// file, directory or symlink. This method is inherited by
+/// File, Directory, and Link.
 
 import 'dart:io';
 

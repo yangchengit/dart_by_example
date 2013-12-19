@@ -1,6 +1,6 @@
 /// Use the Directory create() method to create a directory.
-/// To create intermediate directories, set `recursive = true` (it defaults to
-/// `false`).
+/// To create intermediate directories, set the `recursive` argument to `true`
+/// (default is `false`).
 
 import 'dart:io';
 

@@ -12,7 +12,7 @@ void main() {
     .writeAsBytes(encodedData)
     .then((file) => file.readAsBytes())
     .then((data) {
-      // Decode to a string.
-      print(UTF8.decode(data)); // 'Dart!'
+      // Decode to a string, and print.
+      print(UTF8.decode(data)); // Prints 'Dart!'.
   });
 }
