@@ -1,8 +1,9 @@
 # Dart By Example
 
-Short snippets of code to help you become productive with Dart.
+## This repo is deprecated. Please do not submit pull requests
 
-See the [source on Github](https://github.com/dart-lang/dart_by_example/tree/master/example).
+The Dart I/O mini-samples have been moved to
+[https://github.com/dart-lang/dart-samples/tree/master/dart_io_mini_samples](https://github.com/dart-lang/dart-samples/tree/master/dart_io_mini_samples).
 
 Note: The Angulardart examples have been moved to
 [https://github.com/shailen/angulardart-samples](https://github.com/shailen/angulardart-samples).
